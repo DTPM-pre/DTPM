@@ -13,9 +13,7 @@ cur_pid = os.getpid()
 os.sched_setaffinity(cur_pid, list(range(cpu_num))[:cpu_use])
 print(f"set the max number of cpu used to {cpu_use}") 
 
-
 def system_samplesize(sys_name):
-    """"""
     if sys_name == 'x264':
         num_representative_points = np.multiply(16, [1, 2, 4, 6])  
     elif sys_name == 'lrzip':
@@ -39,10 +37,8 @@ def system_samplesize(sys_name):
 
     return num_representative_points
 
-# seed
 np.random.seed(42)
 
-# systems
 sys_names = ['x264', 'lrzip', 'vp9', 'polly', 'Dune', 'hipacc', 'hsmgp', 'javagc', 'sac']
 
 type_list = []
@@ -50,7 +46,6 @@ nums_points = []
 time_list = []
 
 for sys_name in sys_names:
-    # file_path
     file_path = f'./datasets/Raw data/{sys_name}_AllNumeric_train.csv'
     
     num_representative_points = system_samplesize(sys_name)
@@ -69,7 +64,7 @@ for sys_name in sys_names:
             
             print(f"save_path: {save_path}")
 
-            represent_data.process_and_select_samples(file_path, num_representative_point, save_path)
+            represent_data.process_and_select_samples(file_path, int(num_representative_point), save_path)
             end_time = time.time()
             print(f" processing {sys_name} representative points {num_representative_point} time: {end_time-start_time:.2f}s")
 
